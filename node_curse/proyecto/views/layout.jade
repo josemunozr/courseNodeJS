@@ -1,0 +1,21 @@
+doctype html
+html(lang="es")
+  head
+    title FotoFacilito
+    meta(charset="utf-8")
+    script(src="http://code.jquery.com/jquery-3.1.1.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet")
+    link(href="/public/css/app.css" rel="stylesheet")
+    script(src="/socket.io/socket.io.js")
+    script(src="/public/js/handlebars.js")
+  body
+    nav(class="large-padding black white-text")
+      ul
+        li 
+          a(href="/app") Inicio
+        li
+          a(href="/app/imagenes/new") Subir imagen
+        li
+          a(href="/app/imagenes") Mis Imagenes
+    block contenido

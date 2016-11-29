@@ -1,0 +1,33 @@
+extends ./layout.jade
+block contenido
+  div(class="col-md-6 remove-float center-block big-top-space")
+    form(action="/users" method="post")
+      div(class="form-group")
+        label(for="email") Nombre
+        input(type="text" class="form-control" name="name" placeholder="Nombre" id="name")
+      div(class="form-group")
+        label(for="email") Nombre de Usuario
+        input(type="text" class="form-control" name="username" placeholder="Nombre de Usuario" id="username")
+      div(class="form-group")
+        label(for="email") Edad
+        input(type="text" class="form-control" name="age" placeholder="Edad" id="age")
+      div(class="form-group")
+        label(for="email") Fecha de Nacimiento
+        input(type="text" class="form-control" name="date_of_birth" placeholder="Fecha de Nacimiento" id="date_of_birth")
+      div(class="form-group")
+        label(for="email") Sexo
+        input(type="text" class="form-control" name="sex" placeholder="Sexo" id="sex")
+      div(class="form-group")
+        label(for="email") Email
+        input(type="text" class="form-control" name="email" placeholder="Email" id="email")
+      div(class="form-group")
+        label(for="password") Password
+        input(type="password" class="form-control" name="password" placeholder="Password" id="password")
+        label(for="password") Confirma tu Password
+        input(type="password" class="form-control" name="password_confirmation" placeholder="Password" id="password")
+      div(class="row top-space")
+        div(class="col-xs-12 col-sm-6")
+          input(type="submit" value="Iniciar Sesion" class="btn btn-info")
+        div(class="col-xs-12 col-sm-6 text-right")
+          a(href="/login") Ya tengo una cuenta
+        
