@@ -22,8 +22,8 @@ var sessionMiddleware = session({
 realtime(server,sessionMiddleware)
 
 app.use("/public",express.static("public"));//funcion que retorna el middelware necesario que permite servir archivo staticos (imagenes, css, javascript, entre otros que no tienen compilacion de parte del servidor)
-app.use(bodyParser.json());//para perticiones que tengan el formato application/json
-app.use(bodyParser.urlencoded({extended: true}));//define con que hacer el parsing la libreria
+//app.use(bodyParser.json());//para perticiones que tengan el formato application/json
+//app.use(bodyParser.urlencoded({extended: true}));//define con que hacer el parsing la libreria
 
 
 app.use(methodOverride("_method"));
@@ -32,18 +32,17 @@ app.use(methodOverride("_method"));
 
 app.use(sessionMiddleware);
 
-app.use(formidable({keepExtensions: true}));//app.use(formidable.parse({ keepExtensions: true })); //Quizas esto podria dar error, la respuesta esta en los comentarios del video 39
+app.use(formidable());
 
 app.set("view engine","jade");
 
 app.get("/",function(req,res){
-  console.log(req.session.user_id);
   res.render("index");
 });
 
 app.get("/signup",function(req,res){
   User.find(function(err,doc){
-    console.log(doc);
+    
     res.render("signup");
   });
 });
@@ -55,10 +54,10 @@ app.get("/login",function(req,res){
 app.post("/users",function(req,res){
 
     var user = new User({
-      email: req.body.email,
-      password: req.body.password,
-      password_confirmation: req.body.password_confirmation,
-      username: req.body.username
+      email: req.fields.email,
+      password: req.fields.password,
+      password_confirmation: req.fields.password_confirmation,
+      username: req.fields.username
     });
 
     user.save().then(function(us){
@@ -72,11 +71,14 @@ app.post("/users",function(req,res){
 
 app.post("/sessions",function(req,res){
 
-  User.findOne({email: req.body.email, password: req.body.password},"username email",function(err,docs){
-    console.log(user);
-    console.log(err);
-    req.session.user_id = user._id;
-    res.redirect("/app");
+  User.findOne({email: req.fields.email, password: req.fields.password},"username email",function(err,user){
+    if(err) res.send(String(err));
+    if(user) {
+      req.session.user_id = user._id;
+      res.redirect("/app");
+    }else{
+      res.send("Usuario o contraseña Incorrectos")
+    }
   });
 
 });
@@ -84,4 +86,6 @@ app.post("/sessions",function(req,res){
 app.use("/app",session_middleware);
 app.use("/app",router_app);
 
-server.listen(8181);
+server.listen(8181, function (){
+  console.log("listen at http://localhost:8181");
+});

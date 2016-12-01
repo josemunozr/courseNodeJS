@@ -1,7 +1,7 @@
 extends ./layout.jade
 block contenido
   div(class="col-md-6 remove-float center-block big-top-space")
-    form(action="/users" method="post")
+    form(action="/users" method="POST")
       div(class="form-group")
         label(for="email") Nombre
         input(type="text" class="form-control" name="name" placeholder="Nombre" id="name")
@@ -27,7 +27,7 @@ block contenido
         input(type="password" class="form-control" name="password_confirmation" placeholder="Password" id="password")
       div(class="row top-space")
         div(class="col-xs-12 col-sm-6")
-          input(type="submit" value="Iniciar Sesion" class="btn btn-info")
+          input(type="submit" value="Registrar Usuario" class="btn btn-info")
         div(class="col-xs-12 col-sm-6 text-right")
           a(href="/login") Ya tengo una cuenta
         
